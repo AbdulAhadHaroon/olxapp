@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>chat list</title>
+    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="bootstrap.min.css" >
+    
+    <style>
+
+#navdiv{
+    background-color: rgb(195, 80, 230);
+        }
+
+h2{
+    color: white;
+    font-size: 90%;
+}
+
+#imgsize{
+    height: 50px;
+    width: 50px;
+    }
+
+   
+h5{
+     margin-right: 15px;;
+     text-align: right;
+     padding-left: 60%;
+     }
+
+#add{
+     color: white;  
+ }
+
+#showfetch{
+margin-top:30px; 
+max-height: 300px;
+min-height: 300px;
+overflow: scroll;
+}
+
+#footer{
+margin-top:20px; 
+text-align: center;
+color: white;
+}
+
+
+#btn{
+    background-color:purple;
+    padding: 5px;
+    font-weight:bold;
+    color: white; 
+    margin-top:10px; 
+}
+
+#chatdiv{
+
+margin: 5px auto;
+border-color: black;
+min-height: 600px;
+border-color:purple !important; 
+}
+
+#loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid purple; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+
+.btn{
+    background-color:purple !important;
+    padding: 5px 15px;
+    font-weight:bold;
+    color: white; 
+    margin:5px; 
+}
+
+.group{
+
+    margin: 15px;
+    border: solid thin purple;
+    padding: 20px;
+    border-radius:10px; 
+}
+
+#search{
+    margin: 20px 20px 5px 0px;
+}
+
+</style>
+
+</head>
+
+<body >
+<div class="form-control " id="navdiv">
+<img src="images/olx.png" id="imgsize">
+<h2> OLX.com.pk  </h2>
+</div>
+
+        <div class="col-md-4 form-control border border-success rounded " id="chatdiv" > 
+            <div>
+                <h3 class="text-center"> <b>Chat List</b> </h3>
+                <hr>
+                <div class="group" >
+                     <input class="form-control" placeholder="Search by name or email" id="search" type="text"></input>
+                     <button type="button" onclick="search()" class="btn btn-info" >search</button>
+                    <div class="form-control" id="grop" hidden></div> 
+                </div>
+
+                <div id='loaddiv'>
+                        <div id="loader"></div>
+                        <p><b>Loading please wait</b></p>
+                        </div>
+                 <p id='offline' ></p>
+
+                 <div id="toast"></div>
+
+                <div class="form-control" id="showfetch"></div>
+            </div>
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/toast.js"></script>
+        
+        <script>
+            window.onload = showlist;
+
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+            showToast('press home button to exit or signout');
+            window.location.href='afterlogin.html';
+              };
+
+
+        function showlist(){
+
+            var mid = localStorage.getItem('myid');
+
+            if(mid==null || mid=='' || mid==undefined){
+                window.location.replace('index.html');
+            }
+
+            var checker=0;
+            
+            var myasynktask = new Promise(function(sucess , failure){
+                setTimeout(function()  {
+                    if(checker==0){
+                        document.getElementById('loaddiv').hidden="true";
+                        document.getElementById('offline').innerHTML='<b> No Chats or may have been Deleted </b>';
+                    }
+                 }, 10000)});
+
+
+            var fmail;
+
+                
+          
+               
+                firebase.database().ref("chating").on("value", function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+            
+
+                    var a = childSnapshot.key;
+                    if(a.includes(mid)){
+
+                        checker=1;
+
+                        document.getElementById('loaddiv').hidden="true";
+                        document.getElementById('offline').innerHTML='';
+
+
+                        firebase.database().ref("chating/"+childSnapshot.key).on('child_added', (data) => {
+                            var mail = localStorage.getItem('myemail');
+                            if(mail!=data.val().friendid){
+                                fmail=data.val().friendid;
+                            }else{
+                                fmail=data.val().nfriendid;
+                            }
+                    });
+
+
+                        var np=document.createElement('P');
+                        np.setAttribute('style','padding-left:20px; height:50px; border-radius:10px; border:solid 1px purple; color:white; font-weight:normal; font-size:20px; ' );
+                        np.innerHTML+=fmail;
+
+
+                        var ndiv = document.createElement('div');
+                        ndiv.setAttribute('style','background-color:rgb(195, 80, 230); border-radius:10px; border:none;');
+
+                        ndiv.onclick = function(){
+                        window.location.href="messengerchat.html";
+                        localStorage.setItem('chatid',childSnapshot.key);
+                        localStorage.setItem('friendchatmail',np.innerHTML);
+
+                        }
+                        
+                        ndiv.appendChild(np);
+                    
+                        document.getElementById('showfetch').appendChild(ndiv);
+                    }
+            
+                }); 
+            }); 
+          
+            }
+
+function search(){
+
+    document.getElementById('loaddiv').removeAttribute('hidden');
+
+   var checker=0;
+
+   // to remonve all previous search data from div 
+   document.getElementById("grop").innerHTML="";
+   document.getElementById("grop").hidden='true';
+   document.getElementById('offline').innerHTML='';
+   
+   // taking input from user in search bar
+   var txt = document.getElementById('search').value;
+   if(txt.length<2){
+       //alert("write something");
+       showToast('please searh value must contain 2 or more characters');
+       document.getElementById('loaddiv').hidden="true";
+   }
+   else{
+       
+       var myasynktask = new Promise(function(sucess , failure){
+           setTimeout(function()  {
+               if(checker==0){
+                   document.getElementById('loaddiv').hidden="true";
+                   document.getElementById('loaddiv').removeAttribute('hidden');
+                   document.getElementById('offline').innerHTML='<b> No Data Found </b>';
+               }
+            }, 6000)});
+
+            document.getElementById("grop").removeAttribute('hidden');
+            document.getElementById("grop").innerHTML="<h4>SEARCH RESULT</h4> <hr>";
+                        
+            document.getElementById('loaddiv').removeAttribute('hidden');
+            
+            // saerch data in firebase database in category node
+            firebase.database().ref("/Users").on("value", function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    
+                    var nam=childSnapshot.val().name;
+                    var mail=childSnapshot.val().mail;
+                    
+                    /* geting data from firebase and concatinate (name , description , model) of each and every item in
+                    data variable seperatily */
+                    var data = nam + mail;   
+                    
+                    // check the presence of data in firbase with the refrence of user input in search bar
+                    if(data.toUpperCase().includes(txt.toUpperCase()) && childSnapshot.val().id!=localStorage.getItem('myid') ){
+                   
+                   checker=1;    
+
+                  
+                   document.getElementById('loaddiv').hidden="true";
+                   document.getElementById('offline').innerHTML='';
+                   
+                   // creating dom element 'div'
+                   var ndiv = document.createElement('div');
+                   ndiv.setAttribute('style','padding:5px; border:solid thin purple; margin:5px; border-radius:10px ');
+                       
+
+                   ndiv.onclick = function(){
+                  
+                  localStorage.setItem('friendmail',childSnapshot.val().mail);
+                  localStorage.setItem('friendid',childSnapshot.val().id);
+                  localStorage.setItem('friendno',childSnapshot.val().userno);
+                  localStorage.setItem('friendtoken',childSnapshot.val().token);
+                  
+                  window.location.href="chat.html";
+                  
+             }
+
+                   // create element p to show values 
+                    var np=document.createElement('P');
+                    np.innerHTML+='<p>Name : '+childSnapshot.val().name +'<br> Email: '+childSnapshot.val().mail+'</p>';
+                    np.setAttribute('style','padding-Top:10px;' );
+
+                    ndiv.appendChild(np);
+                   
+                   document.getElementById("grop").appendChild(ndiv);
+              
+                   }
+               });
+           });
+       }
+
+   }
+
+
+
+
+        </script>
+            
+</body>
+</html>

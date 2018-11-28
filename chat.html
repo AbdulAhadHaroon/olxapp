@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Chat</title>
+        
+    <link rel="stylesheet" href="toast.css" >
+    <link rel="stylesheet" href="bootstrap.min.css" >
+    <style>
+
+#navdiv{
+    background-color: rgb(195, 80, 230);
+      }
+        
+h2{
+    color: white;
+    font-size: 90%;
+}
+
+#imgsize{
+    height: 50px;
+    width: 50px;
+    }
+
+   
+h5{
+     margin-right: 15px;;
+     text-align: right;
+     padding-left: 60%;
+     }
+
+#add{
+     color: white;  
+ }
+
+#showfetch{
+margin-top:30px; 
+}
+
+#footer{
+margin-top:20px; 
+text-align: center;
+color: white;
+}
+
+.btn{
+    margin: 5px;
+    min-width: 50px !important;
+}
+
+#chatdiv{
+
+margin: 5px auto;
+border-color: black;
+min-height: 600px;
+border-color:purple !important; 
+}
+
+#chat{
+    max-height: 200px;
+    overflow: scroll;
+}
+#btn1{
+text-align: right;
+}
+
+.btn{
+    background-color: rgb(195, 80, 230) !important; 
+    border: solid thin purple !important;
+}
+
+#msg{
+    border: solid thin purple !important;
+}
+</style>
+
+</head>
+
+<body >
+<div class="form-control " id="navdiv">
+<img src="images/olx.png" id="imgsize">
+<h2> OLX.com.pk  </h2>
+</div>
+
+
+<div class="col-md-4 form-control border border-success rounded " id="chatdiv" > 
+    <div>
+        <h3 class="text-center"> Chat Messenger </h3>
+        <p id="btn1"><button class="btn btn-success" onclick="delChat()" > Delete Chat </button> </p> 
+        <div id="toast"></div>
+        <hr>
+        <p  id="names"> </p>
+        <hr>
+        <input type="text" class="form-control border-success rounded"  placeholder="write your message here" id="msg" >
+        <button type="button" class=" btn btn-success" id="btn" onclick="chating()">Send</button>
+        <hr>
+        <div id="chat"></div>
+        <br>
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/chat.js"></script>
+
+</body>
+</html>

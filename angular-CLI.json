@@ -1,0 +1,5 @@
+"assets": [
+  "assets",
+  "firebase-messaging-sw.js", // <-- here
+  "manifest.json" // <-- and here
+]

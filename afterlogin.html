@@ -1,0 +1,287 @@
+<!DOCTYPE !DOCTYPE html>
+<html>
+    
+    <head>
+        <title>After Login</title>
+        <meta charset="utf-8">
+        <meta content="ie=edge" http-equiv="x-ua-compatible">
+        <meta content="template language" name="keywords">
+        <meta content="Tamerlan Soziev" name="author">
+        <meta content="Admin dashboard html template" name="description">
+        
+    <link rel="stylesheet" href="toast.css" >
+    <link href="bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+       
+
+#navdiv{
+ background-color: rgb(195, 80, 230);
+ padding: 20px;
+ }
+
+
+
+h3{
+     margin-right: 15px;;
+     text-align: right;
+     padding-left: 60%;
+     color: white;
+     }
+
+#add{
+     color: white;  
+ }
+
+#showfetch{
+margin-top:30px; 
+color: black;
+}
+
+
+
+.ts{
+    border: 2px solid purple;
+    border-radius: 7px;
+    height: 40px;
+
+    min-width:240px;
+    padding: 5px;
+    margin: 5px;
+}
+
+
+
+#manydiv{
+    border: solid thin purple;
+    padding: 20px;
+    display: inline-block !important;
+    margin: 30px;
+}
+
+
+#manydiv:hover{
+    background-color: floralwhite;
+    transform: rotate(10deg); 
+    border-radius : 200px; 
+}
+
+#imgsize{
+    height: 80px;
+    width: 80px;
+    }
+
+
+.img{
+    height: 200px !important;
+    width: 200px !important;  
+  }  
+
+  h2{
+      margin: 10px;
+      text-align: center;
+  }
+
+  h1{
+      margin-left: 20px;
+      padding: 5px;
+  }
+
+  #itemdiv{
+      text-align: center;
+  }
+
+ #showfetch{
+    border: none !important;
+ }
+
+
+ #newpara{
+     color: black !important;
+     padding: 5px;
+    margin-left: 10%;
+ }
+
+ #mes{
+     color: white;
+ }
+
+#footer{
+margin-top:20px; 
+text-align: center;
+color: white;
+}
+
+
+#btn{
+    background-color:purple !important;
+    padding: 10px 25px;
+    font-weight:bold;
+    color: white; 
+    margin-top:15px; 
+}
+
+.btn{
+    background-color:purple !important;
+    padding: 5px 15px;
+    font-weight:bold;
+    color: white; 
+    margin:5px; 
+}
+
+.group{
+
+    margin: 50px;
+    border: solid thin purple;
+    padding: 20px;
+    border-radius:10px; 
+}
+
+
+#img1{
+    width: 50px;
+    height: 50px;
+    display: inline-block; 
+}
+
+h4{
+    display: inline;
+    padding-left:15px; 
+}
+
+#search{
+    margin: 20px 20px 5px 0px;
+}
+
+#loader {
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid purple;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+
+ </style>
+
+</head>
+
+<body>
+    <!-- Nav bar Started -->
+  
+                <div id="navdiv" class="form-control">
+                        <img id="imgsize" src="images/olx.png" onclick="window.location.href='chatlist.html'"><br> <b id='mes'>My Messenger</b></img>
+                        <br>
+                        <h3> OLX.com.pk  </h3>
+                        <br><br>
+                 </div>
+    <!-- nav bar ended -->
+
+        <hr>
+
+        <div class="group ">
+           <img id="img1" src="images/olx.png"><h4>Search Bar</h4></img>
+            <input class="form-control" placeholder="Type to search for products..." id="search" type="text"></input>
+            <button type="button" onclick="search()" class="btn btn-info" >search</button>
+            </div>
+
+        <hr>   
+        
+        
+        <div id='loaddiv' hidden>
+            <div id="loader"></div>
+            <p><b>Loading please wait</b></p>
+        </div>
+        
+        <p id='offline' ></p>
+        
+        <div class="form-control" id="showfetch"></div>
+        
+        <h1>CATEGORIES</h1>
+        <div  class="form-control" id="itemdiv" >
+            <div  id="manydiv" onclick="window.location.href='mobilephone.html'">
+                <img src="images/mobile.png" class="img" ></img>
+                <h2>Mobile </h2>
+            </div>
+
+            <div  id="manydiv" onclick="window.location.href='laptop.html'">
+                    <img src="images/laptop 1.png" class="img" ></img>
+                    <h2>Electronics</h2>
+            </div>
+
+            <div id="manydiv" onclick="window.location.href='cars.html'">
+                    <img src="images/car1.png" class="img" ></img>
+                    <h2>Vehicle</h2>
+            </div>
+
+            <div  id="manydiv" onclick="window.location.href='wearingitems.html'">
+                    <img src="images/wearing.png" class="img" ></img>
+                    <h2>Wearing</h2>
+            </div>
+        </div>
+        
+        <h1>LATEST</h1>
+        <div class="form-control" id="itemdiv">
+                <div  id="manydiv">
+                        <img src="images/mod1.jpg" class="img" ></img>
+                        <h5>Price : 50000 rupees</h5>
+                </div>
+
+                <div  id="manydiv">
+                        <img src="images/mod2.jpg" class="img" ></img>
+                        <h5>Price : 10000 rupees</h5>
+                    </div>
+        </div>
+
+        <h1>OTHERS</h1>
+        <div class="form-control" id="itemdiv" >
+                <div  id="manydiv" onclick="window.location.href='additem.html'">
+                        <img src="images/additem.jpg" class="img" ></img>
+                        <h5>ADD ITEMS</h5>
+                </div>
+
+                <div  id="manydiv" onclick="window.location.href='myitems.html'">
+                        <img src="images/myitem.jpeg" class="img" ></img>
+                        <h5>MY ITEMS</h5>
+                </div>
+
+                <div  id="manydiv" onclick="window.location.href='offline.html'">
+                        <img src="images/myfavourite.jpg" class="img" ></img>
+                        <h5>MY FAVOURITES</h5>
+                    </div>
+        </div>
+
+                <div id="toast"></div>
+        
+            <div class="form-control " id="navdiv">
+                 <div id="footer">
+                        <h4 id="dec"> OLX PAKISTAN ! </h4>
+                        <p id="dec"> Pakistan's no 1 New and Used buying and Selling Website</p>
+                        <button id="btn" class="btn btn-sucess" onclick="signout()" >Sign Out</button>    
+                </div>
+            </div>
+
+    
+   
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/afterlogin.js"></script>
+    <script src="js/Hilitor.js"></script>
+    <script src="js/toast.js">
+    </script>
+    
+</body>
+
+</html>

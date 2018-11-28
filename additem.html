@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="bootstrap.min.css" >
+    <link rel="stylesheet" href="toast.css" >
+
+    <style>
+
+            #olximg{
+                      margin:10px auto;
+                      width: 100px;
+                      height: 100px;
+                      display: block;
+                    }
+            
+                    body{
+                      background-color:rgb(172, 112, 230); 
+                    }
+            
+                       
+                        
+                        #btnB{
+                          margin:5px auto;
+                          display:block;
+                          background-color:rgb(172, 112, 230);
+                          margin-bottom:20px; 
+                          margin-top:30px;
+                          
+                        }
+                        
+                        #div2{
+                          margin:10px auto;
+                          padding: 20px;
+                          background-color:white;
+                            border-color:black !important;   
+                        }
+
+                        #loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid purple; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+                        
+ </style>
+
+</head>
+<body>
+        <div class="container">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 border border-success rounded" id="div2" >
+               <img src="images/olx.png" id="olximg">
+                <h1 class="text-center">Add Items</h1>
+        
+                <div class="form-group">
+                  <label >Brand Name</label>
+                  <input type="text" class="form-control" name="name" id="itemname"  placeholder="Enter Item Name">
+                </div>
+        
+                  <div class="form-group">
+                    <label >Description</label>
+                    <input type="text" class="form-control" name="description" id="itemdescription" aria-describedby="emailHelp" placeholder="Enter Item's Description">
+                  </div>
+                  <div class="form-group">
+                    <label>Model</label>
+                    <input class="form-control" id="itemmodel" name="model" placeholder="Enter Model no" rows="3"></input>
+                  </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" id="itemyear" name="date" placeholder="Enter year" rows="3"></input>
+                      </div>
+
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" id="itemprice" name="price" placeholder="Enter price" rows="3"></input>
+                      </div>
+
+                      <div class="form-group">
+                            <label>Type</label><br>
+                            <select id="itemtype" class="form-control" >
+                            <option   value="vehicle">Vehicle</option>
+                            <option value="electronic" selected="selected">Electronic</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="wear">Wear</option>
+                            </select>
+                        </div>
+
+
+                    <div class="form-group border">
+                            <label>file</label>
+                            <input  class="form-control" type="file" accept="image/*" id="itemfile" name="file" ></input>
+                     </div>
+                    <button type="submit" class="form-control btn btn-success" onclick="additem()" id="btnB">Submit</button>
+                  
+                    <div id="toast"></div>
+                  
+                   <!-- <div id="myProgress">
+                      <div id="myBar"></div>
+                    </div>  --> 
+
+                    <div id='loaddiv' hidden>
+                      <div id="loader"></div>
+                      <p><b>Loading please wait</b></p>
+                      </div>
+
+                  </div>
+                 <div class="col-md-4" ></div>
+              </div>
+
+
+              <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+              <script src="js/firebase.js"></script>
+              <script src="js/additem.js"></script>
+              <script src="js/toast.js"></script>
+</body>
+</html>

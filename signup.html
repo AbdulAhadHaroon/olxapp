@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>signup</title>
+    <link rel="stylesheet" href="toast.css" >
+    <link rel="stylesheet" href="bootstrap.min.css" >
+
+    <style>
+
+#olximg{
+          margin:10px auto;
+          width: 100px;
+          height: 100px;
+          display: block;
+        }
+
+        body{
+          background-color:rgb(172, 112, 230); 
+        }
+
+            #btnA{
+              margin:auto;
+              display:block;
+              
+            }
+            
+            #btnB{
+              margin:5px auto;
+              display:block;
+              background-color:rgb(172, 112, 230);
+              margin-bottom:30px; 
+            }
+            
+            #div2{
+              margin:10px auto;
+              padding: 20px;
+              background-color:white;
+                border-color:black !important;   
+            }
+
+            #loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid purple; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+            
+            </style>
+            
+            </head>
+            <body>
+              
+              <div class="container">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 border border-success rounded" id="div2" >
+                    <img src="images/olx.png" id="olximg">
+                  <h1 class="text-center">Signup Account</h1>
+          
+                  <div class="form-group">
+                    <label for="email">Name</label>
+                    <input type="text" class="form-control" name="name" id="signupname"  placeholder="Enter your name">
+                  </div>
+          
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" name="email" id="signupemail" aria-describedby="emailHelp" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">password</label>
+                      <input type="password" class="form-control" id="signuppassword" name="password" placeholder="Enter your password" rows="3"></input>
+                    </div>
+                    <a href="index.html" class="text-center" id="btnA">Login into Account</a><hr>
+                    <button type="submit" class="form-control btn btn-success" onclick="handlesignUp()" id="btnB">Submit</button>
+                    <div id="toast"></div>
+
+                   <!-- <div id="myProgress">
+                      <div id="myBar"></div>
+                    </div> -->
+
+                      <div id='loaddiv' hidden>
+                      <div id="loader"></div>
+                      <p><b>Loading please wait</b></p>
+                      </div>
+                      
+            
+
+                    </div>
+                    <div class="col-md-4" ></div>
+                </div>
+              
+
+                   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+                  
+                   <script src="js/firebase.js"></script>
+                   <script src="js/signup.js"></script>
+                   <script src="js/toast.js"></script>
+            
+                    <script>
+                    window.onload=getfirebasesize;
+                    </script>
+
+
+
+</body>
+</html>

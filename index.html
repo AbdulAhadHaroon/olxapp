@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="bootstrap.min.css" >
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="toast.css" >
+<style>
+
+      .btn{
+        margin: 5px;
+        background-color: rgb(172, 112, 230); 
+      }
+      
+      button:disabled {
+      background:rgb(172, 112, 230) !important; 
+      }
+     
+      #div2{
+        margin: 15px;
+        padding: 20px;
+        border-color:black !important;
+        margin:10px auto; 
+        background-color:white;
+        height: 100%; 
+        }
+
+        #olximg{
+          margin:10px auto;
+          width: 100px;
+          height: 100px;
+          display: block;
+        }
+
+        body{
+          background-color:rgb(172, 112, 230); 
+        }
+
+
+        #btnA{
+          margin:auto;
+          display:block;
+          margin-bottom:30px;  
+        }
+
+        #loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid purple; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+
+      </style>
+
+</head>
+<body >
+    
+
+    <div class="container">
+        <div class="col-md-4" ></div>
+        <div class="col-md-4 border border-success rounded" id="div2" >
+    <img src="images/olx.png" id="olximg">
+      <h1 class="text-center">Login Account</h1>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" class="form-control" id="password" name="password" rows="3"  placeholder="Enter password" ></input>
+          </div><br>
+          <button type="submit" class="form-control btn btn-success " onclick="toggleSignIn()" id="loginbtn" >Login</button>
+         <button type="button" class="form-control btn btn-success"  id="mbtn" onclick="window.location.href='signup.html'" >Signup</button>
+         <a href="offline.html" class="text-center" id="btnA">My Favourite</a>
+
+         <!-- showing progress bar
+         <div id="myProgress">
+          <div id="myBar"></div>
+          </div>
+        -->
+
+        <div id='loaddiv' hidden>
+          <div id="loader"></div>
+          <p><b>Loading please wait</b></p>
+        </div>
+
+        </div>
+        <div id="toast"></div>
+
+        <div class="col-md-4" ></div>
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+              <script >
+    var config = {
+    apiKey: "AIzaSyAALaYHqCdUMM1TtcPk-6xZlIIbopgjWUg",
+    authDomain: "olxapp-6e81c.firebaseapp.com",
+    databaseURL: "https://olxapp-6e81c.firebaseio.com",
+    projectId: "olxapp-6e81c",
+    storageBucket: "olxapp-6e81c.appspot.com",
+    messagingSenderId: "837016258598"
+  };
+  firebase.initializeApp(config);
+  
+if(localStorage.getItem('myid')!=undefined || localStorage.getItem('myid')!=""){
+  localStorage.setItem('myno','');
+  localStorage.setItem('myemail','');
+
+  var myasynktask = new Promise(function(sucess , failure){
+       setTimeout(function()  {         
+  const messaging = firebase.messaging();
+  messaging.requestPermission().then(function () {
+    console.log('Notification permission granted.');
+    return messaging.getToken();
+  }).then(function (token) {
+    // Displaying user token
+    console.log('token >>>> ', token);
+    localStorage.setItem('token' , token);
+     }).catch(function (err) { // Happen if user deney permission
+        console.log('Unable to get permission to notify.', err);
+  });
+
+  }, 3000)});
+
+} else{
+
+  var myasynktask = new Promise(function(sucess , failure){
+       setTimeout(function()  {         
+  const messaging = firebase.messaging();
+  messaging.requestPermission().then(function () {
+    console.log('Notification permission granted.');
+    return messaging.getToken();
+  }).then(function (token) {
+    // Displaying user token
+    console.log('token >>>> ', token);
+    localStorage.setItem('token' , token);
+     }).catch(function (err) { // Happen if user deney permission
+        console.log('Unable to get permission to notify.', err);
+  });
+
+  }, 3000)});
+
+}
+const messaging = firebase.messaging();
+ messaging.onMessage(function (payload) {
+ console.log('onMessage', payload);
+   });
+        
+  </script>
+  <script src="js/app.js"></script>
+  <script src="toast.js"></script>
+  <script src="js/toast.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>My ITEMS</title>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="toast.css" >
+        
+
+        <style>
+
+#navdiv{
+    background-color: rgb(195, 80, 230);
+        }
+
+h2{
+    color: white;
+    font-size: 90%;
+}
+
+#imgsize{
+    height: 50px;
+    width: 50px;
+    }
+
+   
+h5{
+     margin-right: 15px;;
+     text-align: right;
+     padding-left: 60%;
+  
+     }
+
+#add{
+     color: white; 
+     font-size: 80%; 
+ }
+
+#showfetch{
+margin-top:30px; 
+}
+
+#footer{
+margin-top:20px; 
+text-align: center;
+color: white;
+}
+
+
+#btn{
+    background-color:purple;
+    padding: 5px;
+    font-weight:bold;
+    color: white; 
+    margin-top:10px; 
+}
+
+#showfetch{
+    min-height: 600px;
+    max-height: 700px;
+    overflow: scroll;
+}
+
+
+.group{
+
+margin: 50px;
+border: solid thin purple;
+padding: 20px;
+border-radius:10px; 
+}
+
+
+#img1{
+width: 50px;
+height: 50px;
+display: inline-block; 
+}
+
+h4{
+display: inline;
+padding-left:15px; 
+}
+
+
+#item{
+    margin: 5px 20%;
+    visibility: hidden;
+}
+
+#price{
+    margin: 5px 20%;
+    visibility: hidden;
+}
+
+#model{
+margin: 5px 20%;
+visibility: hidden;
+}
+
+#loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid purple; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    text-align: center;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#loaddiv{
+    text-align: center;
+}
+
+
+</style>
+
+</head>
+
+<body >
+<div class="form-control " id="navdiv">
+ <!--   <h5 ><b><a id="add" href="additem.html"> Add Items </a></b></h5> -->
+ <br>
+ <br>
+<img src="images/olx.png" id="imgsize">
+<h2> OLX.com.pk  </h2>
+</div>
+
+<div id='loaddiv'>
+        <div id="loader"></div>
+        <p><b>Loading please wait</b></p>
+</div>
+        
+<p id='offline' ></p>
+
+<div class="form-control" id="showfetch"></div>
+
+<div class="form-control " id="navdiv">
+        <div id="footer">
+               <h4 id="dec"> OLX PAKISTAN ! </h4>
+               <p id="dec"> Pakistan's no 1 New and Used buying and Selling Website</p>
+               <button id="btn" class="btn btn-sucess">Subscribe Now</button>    
+       </div>
+   </div>
+
+   <div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/myitems.js"></script>
+<script src="js/toast.js"></script>
+<!--  calling function autoMATICALLY after completly loading a page  -->
+<script> window.onload = showdata;</script>
+
+</body>
+</html>
